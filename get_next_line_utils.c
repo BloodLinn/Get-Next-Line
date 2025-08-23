@@ -6,11 +6,21 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:14:25 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/23 19:43:48 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/23 20:18:47 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+int	gnl_strlen(char	*dest)
+{
+	int	i;
+
+	i = 0;
+	while (dest && dest[i])
+		i++;
+	return (i);
+}
 
 char	*gnl_strcpy(char *dest, char *src)
 {
@@ -42,7 +52,7 @@ char	*gnl_strchr(const char *s, int c)
 	return (NULL);
 }
 
-char	*gnl_strjoin(char const *s1, char const *s2)
+char	*gnl_strjoin(char *s1, char *s2)
 {
 	size_t	l;
 	size_t	b;
@@ -52,7 +62,7 @@ char	*gnl_strjoin(char const *s1, char const *s2)
 	b = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	tmp = malloc(((ft_strlen(s1)) + ft_strlen(s2) + 1) * (sizeof(char)));
+	tmp = malloc(((gnl_strlen(s1)) + gnl_strlen(s2) + 1) * (sizeof(char)));
 	if (!tmp)
 		return (NULL);
 	while (s1[l])
