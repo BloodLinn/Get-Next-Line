@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/23 20:15:24 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/23 20:20:32 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_read_line(char *lines, int fd)
 		return (lines);
 	}
 	line = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
-	while (gnl_strchr(lines, '\n'))
+	while (gnl_strchr(lines, '\n') && count != 0)
 	{
 		count = read(fd, line, BUFFER_SIZE);
 		if (count == -1)
