@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/26 20:04:42 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:09:36 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ char	*get_first_line(char *lines)
 	gnl_substr(tmp,0,i);
 	tmp[i + 1] = '\0';
 	return (tmp);
+}
+
+char	*get_remains_line(char *lines)
+{
+	
 }
 
 char	*get_read_line(char *lines, int fd)

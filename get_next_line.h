@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:10:34 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/26 20:05:43 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:09:30 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 char	*get_next_line(int fd);
 char	*get_read_line(char *line, int fd);
-char	*get_first_line(char	*lines);
-//char	*get_remains_line(int fd);
+char	*get_first_line(char *lines);
+char	*get_remains_line(char *lines);
 int		gnl_strlen(char	*dest);
 char	*gnl_strcpy(char *dest, char *src);
 char	*gnl_strchr(const char *s, int c);
