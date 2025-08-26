@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:10:34 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/23 20:18:42 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/26 20:05:43 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@
 
 char	*get_next_line(int fd);
 char	*get_read_line(char *line, int fd);
-//char	*get_first_line(int fd);
+char	*get_first_line(char	*lines);
 //char	*get_remains_line(int fd);
 int		gnl_strlen(char	*dest);
 char	*gnl_strcpy(char *dest, char *src);
 char	*gnl_strchr(const char *s, int c);
+char	*gnl_substr(char const *s, unsigned int start, size_t len);
 char	*gnl_strjoin(char *s1, char *s2);
 void	*gnl_calloc(size_t nmemb, size_t size);
 
