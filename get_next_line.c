@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/28 18:35:40 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/28 19:03:23 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,13 @@ char	*get_first_line(char *lines)
 	char	*tmp1;
 	int		i;
 
-	while (gnl_strchr(lines, '\n'))
+	i = 0;
+	while (lines[i] != '\n')
 		i++;
-	if (lines[i] == '\n')
+	if (lines[i + 1] == '\n')
 		i++;
 	tmp1 = calloc((i + 1),sizeof(char));
-	gnl_substr(tmp1,0,i);
+	tmp1 = gnl_substr(tmp1,0,i);
 	tmp1[i + 1] = '\0';
 	return (tmp1);
 }
@@ -64,13 +65,14 @@ char	*get_remains_line(char *lines)
 	int		t;
 
 	j = 0;
+	i = 0;
 	t = gnl_strlen(lines);
 	while (gnl_strchr(lines, '\n'))
 		i++;
-	if (lines[i] == '\n')
+	if (lines[i + 1] == '\n')
 		i++;
 	tmp2 = calloc((t - i + 1), sizeof(char));
-	while (tmp2[j] == '\0')
+	while (lines[i + j] != '\0')
 	{
 		tmp2[j] = lines[i + j];
 		j++;
@@ -84,6 +86,7 @@ char	*get_read_line(char *lines, int fd)
 	char	line[BUFFER_SIZE + 1];
 	ssize_t		count;
 
+	count = 1;
 	if (!lines)
 	{
 		lines = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
@@ -104,14 +107,17 @@ char	*get_read_line(char *lines, int fd)
 char	*get_next_line(int fd)
 {
 	static char	*lines;
-	int			count;
+	char		*first;
+	char		*remains;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	lines = get_read_line(lines, fd);
 	if (!lines)
 		return (NULL);
-	lines = get_first_line(lines);
-	lines = get_remains_line(lines);
+	first = get_first_line(lines);
+	remains = get_remains_line(lines);
+	free(lines);
+	lines = remains;
 	return (lines);
 }
