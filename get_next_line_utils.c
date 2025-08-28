@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:14:25 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/23 20:18:47 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/28 17:58:17 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*gnl_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char	*gnl_strchr(const char *s, int c)
+char	*gnl_strchr(char *s, int c)
 {
 	int	i;
 
