@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/28 19:03:23 by aokur            ###   ########.fr       */
+/*   Updated: 2025/08/28 19:44:39 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,12 @@ char	*gnl_substr(char *s, unsigned int start, size_t len)
 		len = a - start;
 	if (start >= a)
 	{
-		 tmp = malloc(1);
+		 tmp = gnl_calloc(1, sizeof(char));
 		if (tmp)
 			tmp[0] = '\0';
 		return (tmp);
 	}
-	tmp = malloc((len + 1) * sizeof(char));
-	if (!tmp)
-		return (NULL);
+	tmp = gnl_calloc((len + 1) , sizeof(char));
 	while (i < len)
 	{
 		tmp[i] = s[start + i];
@@ -47,13 +45,11 @@ char	*get_first_line(char *lines)
 	int		i;
 
 	i = 0;
-	while (lines[i] != '\n')
+	while (gnl_strchr(lines, '\n'))
 		i++;
 	if (lines[i + 1] == '\n')
 		i++;
-	tmp1 = calloc((i + 1),sizeof(char));
-	tmp1 = gnl_substr(tmp1,0,i);
-	tmp1[i + 1] = '\0';
+	tmp1 = gnl_substr(lines, 0, i);
 	return (tmp1);
 }
 
@@ -78,6 +74,7 @@ char	*get_remains_line(char *lines)
 		j++;
 	}
 	tmp2[j] = '\0';
+	free(lines);
 	return (tmp2);
 }
 
@@ -88,16 +85,14 @@ char	*get_read_line(char *lines, int fd)
 
 	count = 1;
 	if (!lines)
-	{
 		lines = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
-		lines[0] = '\0';
-		return (lines);
-	}
-	while(gnl_strchr(lines, '\n') && count != 0)
+	while (gnl_strchr(lines, '\n') && count != 0)
 	{
 		count = read(fd, line, BUFFER_SIZE);
 		if (count == -1)
 			return (free(lines), NULL);
+		if (count == 0)
+			break ;
 		line[count] = '\0';
 		lines = gnl_strjoin(line,lines);
 	}
@@ -108,7 +103,6 @@ char	*get_next_line(int fd)
 {
 	static char	*lines;
 	char		*first;
-	char		*remains;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -116,8 +110,6 @@ char	*get_next_line(int fd)
 	if (!lines)
 		return (NULL);
 	first = get_first_line(lines);
-	remains = get_remains_line(lines);
-	free(lines);
-	lines = remains;
-	return (lines);
+	lines = get_remains_line(lines);
+	return (first);
 }
