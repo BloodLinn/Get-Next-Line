@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/30 20:35:00 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/01 20:11:37 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ char	*gnl_substr(char *s, unsigned int start, size_t len)
 		len = a - start;
 	if (start >= a)
 	{
-		tmp = gnl_calloc(1, sizeof(char));
+		tmp = malloc(1 *sizeof(char));
 		if (tmp)
 			tmp[0] = '\0';
 		return (tmp);
 	}
-	tmp = gnl_calloc((len + 1) , sizeof(char));
+	tmp = malloc((len + 1) *sizeof(char));
 	while (i < len)
 	{
 		tmp[i] = s[start + i];
@@ -80,14 +80,19 @@ char	*get_read_line(char *lines, int fd)
 
 	count = 1;
 	if (!lines)
-		lines = gnl_calloc(BUFFER_SIZE + 1, sizeof(char));
-	while (!gnl_strchr(lines, '\n') && count != 0)
+		lines = gnl_calloc((BUFFER_SIZE + 1) ,sizeof(char));
+	while (!gnl_strchr(lines, '\n') && count > 0)
 	{
 		count = read(fd, line, BUFFER_SIZE);
+		line[count] = 0;
 		if (count == -1)
 			return (free(lines), NULL);
-		line[count] = '\0';
 		lines = gnl_strjoin(lines,line);
+	}
+	if (gnl_strlen(lines)== 0)
+	{
+		free(lines);
+		return NULL;
 	}
 	return (lines);
 }
@@ -96,7 +101,6 @@ char	*get_next_line(int fd)
 {
 	static char	*lines;
 	char		*first;
-	char		*tmp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -104,8 +108,7 @@ char	*get_next_line(int fd)
 	if (!lines)
 		return (NULL);
 	first = get_first_line(lines);
-	tmp = get_remains_line(lines);
-	lines = tmp;
+	lines = get_remains_line(lines);
 	return (first);
 }
 #include <stdio.h>
@@ -114,11 +117,13 @@ int main()
 {
 	int fd = open("test.txt", O_RDONLY);
 	char *line = get_next_line(fd);
-	while(line)
+	while (line)
 	{
-		printf("%s", line);
+		printf("%s" ,line);
 		free(line);
+		line = NULL;
 		line = get_next_line(fd);
+		
 	}
 	
 	return 0;
