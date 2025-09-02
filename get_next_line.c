@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/09/02 17:07:05 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/02 17:54:30 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ char	*gnl_substr(char *s, unsigned int start, size_t len)
 
 char	*get_first_line(char *lines)
 {
-	int	i;
+	int		i;
+	char	*tmp1;
 
 	i = 0;
 	while (lines[i] && lines[i] != '\n')
 		i++;
 	if (lines[i] == '\n')
 		i++;
-	return (gnl_substr(lines, 0, i));
+	tmp1 = gnl_substr(lines, 0, i);
+	return (tmp1);
 }
 
 char	*get_remains_line(char *lines)
@@ -95,6 +97,7 @@ char	*get_read_line(char *lines, int fd)
 		free(lines);
 		return (NULL);
 	}
+	free(line);
 	return (lines);
 }
 
