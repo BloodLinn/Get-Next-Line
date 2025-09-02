@@ -6,15 +6,15 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:10:34 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/30 20:18:50 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/02 17:13:35 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+#ifndef BUFFER_SIZE  
+# define BUFFER_SIZE 
 #endif
 
 # include <stdlib.h>
@@ -32,3 +32,5 @@ char	*gnl_strjoin(char *s1, char *s2);
 void	*gnl_calloc(size_t nmemb, size_t size);
 
 #endif
+
+// 8377639

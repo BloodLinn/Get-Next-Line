@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:14:25 by aokur             #+#    #+#             */
-/*   Updated: 2025/09/01 20:05:12 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/02 16:23:00 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	*gnl_strjoin(char *s1, char *s2)
 
 	l = 0;
 	b = 0;
-	tmp = malloc((((gnl_strlen(s1)) + gnl_strlen(s2) + 1)) * (sizeof(char)));
+	tmp = gnl_calloc((((gnl_strlen(s1)) + gnl_strlen(s2) + 1)), (sizeof(char)));
 	while (s1[l])
 	{
 		tmp[l] = s1[l];
@@ -71,7 +71,6 @@ char	*gnl_strjoin(char *s1, char *s2)
 		tmp[l + b] = s2[b];
 		b++;
 	}
-
 	tmp[l + b] = '\0';
 	return (tmp);
 }

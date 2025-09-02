@@ -5,27 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/23 20:15:02 by aokur             #+#    #+#             */
-/*   Updated: 2025/08/28 19:51:05 by aokur            ###   ########.fr       */
+/*   Created: 2025/09/02 16:24:57 by aokur             #+#    #+#             */
+/*   Updated: 2025/09/02 16:27:06 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <fcntl.h>
 #include <stdio.h>
+#include <fcntl.h>
 
-int main(void)
+int main()
 {
 	int fd = open("test.txt", O_RDONLY);
-	char *line = get_next_line(fd);
-	printf("%s", line);
-	free(line);
-	/*while (line)
+	char	*list = get_next_line(fd);
+	while (list)
 	{
-		printf("%s", line);
-		free(line);
-		line = get_next_line(fd);
-	}*/
-	close(fd);
-	return 0;
+		printf("%s", list);
+		free(list);
+		list = get_next_line(fd);
+	}
+	return (0);
 }
