@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:14:25 by aokur             #+#    #+#             */
-/*   Updated: 2025/09/02 17:32:29 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/05 19:22:13 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ int	gnl_strlen(char	*dest)
 	int	i;
 
 	i = 0;
-	while (dest && dest[i])
+	if (!dest)
+		return (0);
+	while (dest[i])
 		i++;
 	return (i);
 }
@@ -27,6 +29,8 @@ char	*gnl_strcpy(char *dest, char *src)
 	int	i;
 
 	i = 0;
+	if (!dest && !src)
+		return (0);
 	while (src[i])
 	{
 		dest[i] = src[i];
@@ -41,6 +45,8 @@ char	*gnl_strchr(char *s, int c)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (s[i])
 	{
 		if (s[i] == (unsigned char )c)
@@ -60,7 +66,11 @@ char	*gnl_strjoin(char *s1, char *s2)
 
 	l = 0;
 	b = 0;
+	if (!s1 && !s2)
+		return (NULL);
 	tmp = gnl_calloc((((gnl_strlen(s1)) + gnl_strlen(s2) + 1)), (sizeof(char)));
+	if (!tmp)
+		return (NULL);
 	while (s1[l])
 	{
 		tmp[l] = s1[l];

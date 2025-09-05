@@ -6,7 +6,7 @@
 /*   By: aokur <aokur@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 15:11:51 by aokur             #+#    #+#             */
-/*   Updated: 2025/09/02 18:17:24 by aokur            ###   ########.fr       */
+/*   Updated: 2025/09/05 19:25:01 by aokur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 char	*gnl_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	a;
-	char	*tmp;
 	size_t	i;
+	char	*tmp;
 
+	if (!s)
+		return (0);
 	i = 0;
 	a = gnl_strlen(s);
 	if (a < start + len)
@@ -25,8 +27,6 @@ char	*gnl_substr(char *s, unsigned int start, size_t len)
 	if (start >= a)
 	{
 		tmp = gnl_calloc(1, sizeof(char));
-		if (tmp)
-			tmp[0] = '\0';
 		return (tmp);
 	}
 	tmp = gnl_calloc((len + 1), sizeof(char));
@@ -59,12 +59,8 @@ char	*get_remains_line(char *lines)
 	int		t;
 	char	*tmp2;
 
-	if (!lines)
-		return (NULL);
 	i = 0;
 	t = gnl_strlen(lines);
-	if (lines == NULL)
-		return (NULL);
 	while (lines[i] && lines[i] != '\n')
 		i++;
 	if (!lines[i])
@@ -83,8 +79,8 @@ char	*get_read_line(char *lines, int fd)
 
 	count = 1;
 	if (!lines)
-		lines = gnl_calloc((BUFFER_SIZE), sizeof(char));
-	line = gnl_calloc((BUFFER_SIZE), sizeof(char));
+		lines = gnl_calloc(1, sizeof(char));
+	line = gnl_calloc((BUFFER_SIZE + 1), sizeof(char));
 	while (!gnl_strchr(lines, '\n') && count > 0)
 	{
 		count = read(fd, line, BUFFER_SIZE);
